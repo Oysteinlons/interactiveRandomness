@@ -30,7 +30,7 @@ testTall += 1;
 //The image html tag should update 
 //fast with the firebase  object you set as the image website
 var firebaseRef = firebase.database().ref();
-var newInfo1 = document.getElementById("inpt1").value
+var newInfo1 = document.getElementById("inpt1").value;
 firebaseRef.child("imgSRC").set(newInfo1);
 
 console.log("pasted " +newInfo1+ " inside the child " +testTall+ "");
@@ -39,12 +39,18 @@ console.log("pasted " +newInfo1+ " inside the child " +testTall+ "");
 document.getElementById("pic1").src = firebaseRef.child("imgSRC");
 }
 
-//http-server -a localhost -p 8000 -c-1
+
 /*
+http-server -a localhost -p 8000 -c-1
+
 {
   "rules": {
     ".read": "auth != null",
     ".write": "auth != null"
   }
-}
+
+
+
+
+Hei, dette er awiudhawOIUDGWAFOUyasgwefpaweåahahahahh
 */
