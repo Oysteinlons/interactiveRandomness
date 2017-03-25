@@ -1,4 +1,3 @@
-
 var firebaseRef = firebase.database().ref();
  // // Initialize Firebase
  //  var config = {
@@ -12,7 +11,7 @@ var firebaseRef = firebase.database().ref();
 
 var testTall = 0;
 var number = 0;
-//setInterval(skiftBilde, 100);
+// setInterval(skiftBilde, 100);
 //lag en funksjon som skifter bilde 10 ganger i sekundet
 function skiftBilde(){
 		if(number == 4){
@@ -43,7 +42,7 @@ function updatePicOnFirebase(){
 	firebaseRef.child("imgSRC").set(newInfo1);
 
 	console.log("pasted " +newInfo1+ " inside the child " +testTall+ "");
-
+	getPicFromFirebase();
 }
 
 function getPicFromFirebase(){
@@ -60,8 +59,8 @@ function getPicFromFirebase(){
 	});
 
 }
-
-
+// 
+// 
 /*
 http-server -a localhost -p 8000 -c-1
 
@@ -70,4 +69,6 @@ http-server -a localhost -p 8000 -c-1
     ".read": "auth != null",
     ".write": "auth != null"
   }
+<<<<<<< Updated upstream
 */
+
