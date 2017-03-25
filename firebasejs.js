@@ -46,6 +46,7 @@ function submitClick(){
 			nyData = snapshot.val()
 			console.log("NyData: ", nyData)
 			console.log("Snapshot from firebase database: ", snapshot)
+			document.getElementById("pic1").src = nyData;
 	});
 
 	var newInfo1 = document.getElementById("inpt1").value;
@@ -55,7 +56,6 @@ function submitClick(){
 
 	//<image></image> sourcen skal refferere til et firebase object (new)
 	// document.getElementById("pic1").src = firebaseRef.child("imgSRC");
-	document.getElementById("pic1").src = nyData;
 }
 
 
