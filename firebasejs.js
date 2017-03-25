@@ -36,23 +36,26 @@ while(true){
 }
 */
 function submitClick(){
-testTall += 1;
+	testTall += 1;
 
-//The image html tag should update 
-//fast with the firebase  object you set as the image website
-var firebaseRef = firebase.database().ref();
-var nyData = "";
-var dataFromFirebaseDatabase = firebaseRef.Child("imgSRC").once('value').then(function(snapshot){
-		nyData = snapshot.val()
-});
+	//The image html tag should update 
+	//fast with the firebase  object you set as the image website
+	var firebaseRef = firebase.database().ref();
+	var nyData = "";
+	var dataFromFirebaseDatabase = firebaseRef.child("imgSRC").once('value').then(function(snapshot){
+			nyData = snapshot.val()
+			console.log("NyData: ", nyData)
+			console.log("Snapshot from firebase database: ", snapshot)
+	});
 
-var newInfo1 = document.getElementById("inpt1").value;
-firebaseRef.child("imgSRC").set(newInfo1);
+	var newInfo1 = document.getElementById("inpt1").value;
+	firebaseRef.child("imgSRC").set(newInfo1);
 
-console.log("pasted " +newInfo1+ " inside the child " +testTall+ "");
+	console.log("pasted " +newInfo1+ " inside the child " +testTall+ "");
 
-//<image></image> sourcen skal refferere til et firebase object (new)
-document.getElementById("pic1").src = firebaseRef.child("imgSRC");
+	//<image></image> sourcen skal refferere til et firebase object (new)
+	// document.getElementById("pic1").src = firebaseRef.child("imgSRC");
+	document.getElementById("pic1").src = nyData;
 }
 
 
