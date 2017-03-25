@@ -1,5 +1,5 @@
-(function(){
 
+var firebaseRef = firebase.database().ref();
  // // Initialize Firebase
  //  var config = {
  //    apiKey: "AIzaSyDthJrlu5rWBsdcwitIWYoGY8dA65DxGvI",
@@ -35,27 +35,30 @@ while(true){
 	//document.getElementById("pic1").src = Referer til imgSRC linken;
 }
 */
-function submitClick(){
-	testTall += 1;
+function updatePicOnFirebase(){
 
-	//The image html tag should update 
-	//fast with the firebase  object you set as the image website
-	var firebaseRef = firebase.database().ref();
-	var nyData = "";
-	var dataFromFirebaseDatabase = firebaseRef.child("imgSRC").once('value').then(function(snapshot){
-			nyData = snapshot.val()
-			console.log("NyData: ", nyData)
-			console.log("Snapshot from firebase database: ", snapshot)
-			document.getElementById("pic1").src = nyData;
-	});
 
 	var newInfo1 = document.getElementById("inpt1").value;
+
 	firebaseRef.child("imgSRC").set(newInfo1);
 
 	console.log("pasted " +newInfo1+ " inside the child " +testTall+ "");
 
-	//<image></image> sourcen skal refferere til et firebase object (new)
-	// document.getElementById("pic1").src = firebaseRef.child("imgSRC");
+}
+
+function getPicFromFirebase(){
+
+	var nyttBilde = ""
+
+	firebaseRef.child("imgSRC").once('value').then(function(snapshot){
+
+			nyData = snapshot.val()
+			console.log("NyData: ", nyData)
+			console.log("Snapshot from firebase database: ", snapshot)
+			document.getElementById("pic1").src = nyData;
+
+	});
+
 }
 
 
@@ -67,14 +70,4 @@ http-server -a localhost -p 8000 -c-1
     ".read": "auth != null",
     ".write": "auth != null"
   }
-
-
-
-
-Hei, dette er awiudhawOIUDGWAFOUyasgwefpaweåahahahahh
 */
-
-
-
-
-}());
