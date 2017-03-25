@@ -1,3 +1,14 @@
+(function(){
+
+ // // Initialize Firebase
+ //  var config = {
+ //    apiKey: "AIzaSyDthJrlu5rWBsdcwitIWYoGY8dA65DxGvI",
+ //    authDomain: "friendlychat-d43d6.firebaseapp.com",
+ //    databaseURL: "https://friendlychat-d43d6.firebaseio.com",
+ //    storageBucket: "friendlychat-d43d6.appspot.com",
+ //    messagingSenderId: "545387915863"
+ //  };
+ //  firebase.initializeApp(config);
 
 var testTall = 0;
 var number = 0;
@@ -30,6 +41,11 @@ testTall += 1;
 //The image html tag should update 
 //fast with the firebase  object you set as the image website
 var firebaseRef = firebase.database().ref();
+var nyData = "";
+var dataFromFirebaseDatabase = firebaseRef.Child("imgSRC").once('value').then(function(snapshot){
+		nyData = snapshot.val()
+});
+
 var newInfo1 = document.getElementById("inpt1").value;
 firebaseRef.child("imgSRC").set(newInfo1);
 
@@ -54,3 +70,8 @@ http-server -a localhost -p 8000 -c-1
 
 Hei, dette er awiudhawOIUDGWAFOUyasgwefpaweåahahahahh
 */
+
+
+
+
+}());
