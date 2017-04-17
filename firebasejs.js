@@ -1,66 +1,70 @@
 var firebaseRef = firebase.database().ref();
- // // Initialize Firebase
- //  var config = {
- //    apiKey: "AIzaSyDthJrlu5rWBsdcwitIWYoGY8dA65DxGvI",
- //    authDomain: "friendlychat-d43d6.firebaseapp.com",
- //    databaseURL: "https://friendlychat-d43d6.firebaseio.com",
- //    storageBucket: "friendlychat-d43d6.appspot.com",
- //    messagingSenderId: "545387915863"
- //  };
- //  firebase.initializeApp(config);
 
 var testTall = 0;
 var number = 0;
-// setInterval(skiftBilde, 100);
-//lag en funksjon som skifter bilde 10 ganger i sekundet
-function skiftBilde(){
-		if(number == 4){
-			number = 0
-		}
-		number += 1;
-		if (number == 1){
-			newInfo1 = "http://i.imgur.com/yqPpUT6.jpg";
-		}else if(number == 2){
-			newInfo1 = "http://i.imgur.com/YJ9Kkf6.png";
-		}else if(number == 3){
-			newInfo1 = "http://i.imgur.com/oZ7aG8x.jpg";
-		}
-		document.getElementById("pic1").src = newInfo1;
+var currentLink = 0;
+var firebaseLink = 0;
+var i = 0;
+var lastLinkSubmitted = 0;
 
+firebaseRef.child("linkCounter").once('value').then(function(snapshot){
+			i = snapshot.val();
+
+	});
+
+setInterval(checkForUpdate, 10);
+
+function checkForUpdate(){
+
+		currentLink = document.getElementById("pic1").src;
+		console.log("The link showed in <img> tags is: " +currentLink)
+
+		if(!(currentLink == firebaseLink)){
+			console.log(currentLink+ " and " +firebaseLink+ " is the same");
+			getPicFromFirebase();
+		}
+
+		firebaseRef.child("imgSRC").once('value').then(function(snapshot){
+
+		firebaseLink = snapshot.val();
+		console.log("The link on firebase is: " +firebaseLink);
+
+	});
 }
-/*
-while(true){
-	//Skal oppdatere bildet til den firebaseteksten hele tiden.
-	//document.getElementById("pic1").src = Referer til imgSRC linken;
-}
-*/
+
 function updatePicOnFirebase(){
+	i += 1;
+	
+	firebaseRef.child("linksSubmitted").child(i).once('value').then(function(snapshot){
+		lastLinkSubmitted = snapshot.val();
+	});
 
-
-	var newInfo1 = document.getElementById("inpt1").value;
-
+	newInfo1 = document.getElementById("inpt1").value;
+	
 	firebaseRef.child("imgSRC").set(newInfo1);
+	firebaseRef.child("linkCounter").set(i);
+	//lag en if setning her og sjekk om newInfo1 er lik den siste linken
+	// som ble pasta i firebase
+	
+	firebaseRef.child("linksSubmitted").child(i).set(newInfo1);
+	
+	console.log("The link: " +newInfo1+ " was printed into linksSubmitted object in firebase");
 
 	console.log("pasted " +newInfo1+ " inside the child " +testTall+ "");
-	getPicFromFirebase();
+
 }
 
 function getPicFromFirebase(){
 
-	var nyttBilde = ""
-
 	firebaseRef.child("imgSRC").once('value').then(function(snapshot){
-
 			nyData = snapshot.val()
 			console.log("NyData: ", nyData)
 			console.log("Snapshot from firebase database: ", snapshot)
 			document.getElementById("pic1").src = nyData;
-
 	});
 
 }
-// 
-// 
+
 /*
 http-server -a localhost -p 8000 -c-1
 
@@ -71,4 +75,3 @@ http-server -a localhost -p 8000 -c-1
   }
 <<<<<<< Updated upstream
 */
-

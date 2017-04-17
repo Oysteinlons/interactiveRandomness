@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <body>
+
 <div>
-<img max-width= 500px height= 200px id="pic1" src=""></img>
+<img height= 200px id="pic1" src=""></img>
 </div>
+
 <input id="inpt1" value="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif">
 </input>
 
 <button width=100px heigth=20px onClick= "updatePicOnFirebase()">updatePicOnFirebase</button>
-<button width=100px heigth=20px onClick= "getPicFromFirebase()">getPicFromFirebase</button>
+	
 
 
 <script src="https://www.gstatic.com/firebasejs/3.7.3/firebase.js"></script>
+
 <script>
   // Initialize Firebase
   var config = {
@@ -22,7 +25,8 @@
   };
   firebase.initializeApp(config);
 </script>
+
 <script src="firebasejs.js"></script>
 
 </body>
-</html> 
+</html>
